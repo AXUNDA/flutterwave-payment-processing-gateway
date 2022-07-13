@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Buy Products</title>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+    <link rel="stylesheet" href="style.css">
+    
+  </head>
+  <body class="container" >
+    <div class="row">
+      <div class="col col-lg-6 col-sm-6">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Email address</label>
+          <input type="email" class="form-control email" id="exampleFormControlInput1" placeholder="name@example.com">
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Name</label>
+          <textarea class="form-control name" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Phone Number</label>
+          <textarea class="form-control number" id="exampleFormControlTextarea2" rows="3"></textarea>
+        </div>
+
+      </div>
+      <div class="col col-lg-6 col-sm-6">
+        <div class="product">
+          <img
+            src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-12-purple-select-2021?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1617130317000"
+            alt="iphone 12"
+            class="product_img"
+          />
+          <div class="description">
+            <h3>iPhone 12</h3>
+            <h4 class="total-price">&#8358 100</h4>
+          </div>
+          
+        </div>
+
+      </div>
+      <div class="col col-lg-12 col-sm-12"> 
+        <button type="button" id="btn">BUY</button>
+
+      </div>
+    </div>
+      
+  </body>
+  <script type="text/javascript">
+    // Create an instance of the Stripe object with your publishable API key
+   
+    var checkoutButton = document.getElementById("btn");
+    // const name = document.getElementById("exampleFormControlInput1")[0].value;
+    // const email = document.getElementById("exampleFormControlInput1").value
+    // const number = document.getElementsByClassName("form-control")
+
+    checkoutButton.addEventListener("click", function () {
+      const email = document.getElementById("exampleFormControlInput1").value
+      const name = document.getElementById("exampleFormControlTextarea1").value
+      const number = document.getElementById("exampleFormControlTextarea2").value
+      total = document.getElementsByClassName("total-price")[0].innerText.replace("₦","")
+      // alert(email)
+      // alert(number)
+      // alert(name)
+      // alert(total)
+      // fetch("http://localhost:8080/payment", {
+      //   method:"POST",
+      //   headers: {'Content-Type': 'application/json','Accept': 'application/json',
+      //   'url': '/payment',},
+        
+      //   body: JSON.stringify({
+      //       "details": {
+      //           "name": name, 
+      //           "email": mail, 
+      //           "number": number,
+      //           "total": total
+      //       }})
+      // })
+     
+
+
+       fetch('/payment', {
+    method: 'POST',
+    // mode: 'no-cors',
+    redirect: 'follow',
+    headers: {
+      // 'Access-Control-Allow-Origin': "*",
+      // 'Access-Control-Allow-Credentials': 'true',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      
+      
+     
+    },
+    body: JSON.stringify({
+      "details":{
+        name: name,
+        email: email,
+        number: number,
+        total: total,
+      }
+
+      
+    })
+  }).then(res => res.json()).then(function (data) {window.location.href=data.data.link})
+        
+    });
+  </script>
+</html>

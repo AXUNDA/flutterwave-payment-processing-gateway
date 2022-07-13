@@ -1,0 +1,19 @@
+{
+  "name": "node-stripe-payment-gateway",
+  "version": "1.0.0",
+  "description": "Implementing flutterWave payment gateway in node.js",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Azunda",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.17.1",
+    "got": "^12.1.0"
+  }
+}
