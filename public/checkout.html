@@ -27,7 +27,7 @@
         </div>
 
       </div>
-      <div class="col col-lg-6 col-sm-6">
+      <div class="col col-lg-6 col-sm-6 mt-4">
         <div class="product">
           <img
             src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-12-purple-select-2021?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1617130317000"
@@ -80,9 +80,11 @@
       //       }})
       // })
      
-
-
-       fetch('/payment', {
+if (email ===""||name ===""||number==="") {
+  alert("please fill all the fields")
+  
+} else {
+  fetch('/payment', {
     method: 'POST',
     // mode: 'no-cors',
     redirect: 'follow',
@@ -106,6 +108,10 @@
       
     })
   }).then(res => res.json()).then(function (data) {window.location.href=data.data.link})
+  
+}
+
+      
         
     });
   </script>
